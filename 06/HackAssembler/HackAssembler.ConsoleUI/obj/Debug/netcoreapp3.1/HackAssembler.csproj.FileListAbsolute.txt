@@ -1,0 +1,13 @@
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.exe
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.deps.json
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.runtimeconfig.json
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.runtimeconfig.dev.json
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.dll
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\bin\Debug\netcoreapp3.1\HackAssembler.pdb
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.AssemblyInfoInputs.cache
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.AssemblyInfo.cs
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.csproj.CoreCompileInputs.cache
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.dll
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.pdb
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.genruntimeconfig.cache
+C:\Users\Leon\source\repos\HackAssembler.ConsoleUI\HackAssembler\obj\Debug\netcoreapp3.1\HackAssembler.csprojAssemblyReference.cache
