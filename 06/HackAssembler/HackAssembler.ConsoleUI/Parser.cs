@@ -1,69 +1,74 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace HackAssembler
 {
     public class Parser
     {
-        public void UpdateSymbolTable(SymbolTable symbolTable, StreamReader fileReader)
-        {
-            var currentLine = string.Empty;
-            for (var instructionNum = 0; currentLine != null;)
-            {
-                currentLine = fileReader.ReadLine();
-                if (string.IsNullOrEmpty(currentLine)) continue;
-                currentLine = CommentFilter(currentLine);
+        private int variableAddress = 16;
 
-                HandleLabels(currentLine, symbolTable, instructionNum);
-                HandleVariables(symbolTable, currentLine, instructionNum);
-                if (currentLine.Contains('@') || currentLine.Contains(';') || currentLine.Contains('=') )
+        public IEnumerable<string> Parse(SymbolTable symbolTable, StreamReader fileReader)
+        {
+            var filteredCommands = FilterCode(fileReader);
+            AddLabels(filteredCommands, symbolTable);
+
+            var i = 0;
+            foreach (var command in filteredCommands)
+            {
+                if (command.StartsWith("@"))
                 {
-                    instructionNum++;
-                } 
+                    var instructionA = command[1..];
+                    var validInstruction = int.TryParse(instructionA, out int _);
+
+                    if (!symbolTable.Contains(instructionA) && validInstruction)
+                    {
+                        symbolTable.Add(instructionA, variableAddress);
+                        variableAddress++;
+                    }
+                }
+                i++;
+            }
+            filteredCommands.RemoveAll(command => command.StartsWith('('));
+            return filteredCommands;
+        }
+
+        private void AddLabels(IList<string> commands, SymbolTable symbolTable)
+        {
+            var removedLabels = 0;
+            var i = 0;
+            foreach (var command in commands)
+            {
+                if (command.StartsWith('(') && command.EndsWith(')'))
+                {
+                    var label = command.Substring(1, command.IndexOf(')'));
+                    symbolTable.Add(label, i - removedLabels);
+                    removedLabels++;
+                }
+                i++;
             }
         }
 
-        private void HandleVariables(SymbolTable symbolTable, string currentLine, int instructionNum)
+        private List<string> FilterCode(StreamReader streamReader)
         {
-            var variablePresent = currentLine.Contains('@');
-            if (variablePresent)
+            var commandsAndLabels = new List<string>();
+            var currentLine = "";
+
+            while ((currentLine = streamReader.ReadLine()) != null)
             {
-                var variable = currentLine
-                               .Trim()
-                               .Substring(1);
-                var isForwardReference = !symbolTable.Contains(variable);
-                if (isForwardReference)
+                currentLine = currentLine.
+                              Replace(" ", "")
+                              .Replace("\\t", "");
+                var commentIndex = currentLine.IndexOf("//");
+                if (commentIndex > -1)
                 {
-                    symbolTable.Add(variable, instructionNum);
+                    currentLine = currentLine.Substring(0, commentIndex);
+                }
+                if (currentLine != string.Empty)
+                {
+                    commandsAndLabels.Add(currentLine);
                 }
             }
-        }
-
-        private void HandleLabels(string currentLine, SymbolTable symbolTable, int instructionNum)
-        {
-            var openBracketLoc = currentLine.IndexOf('(');
-            var closeBracketLoc = currentLine.IndexOf(')');
-            var labelPresent = openBracketLoc != -1 &&
-                               closeBracketLoc != -1;
-
-            if (labelPresent && currentLine.Length > 0)
-            {
-                var labelToAdd = currentLine.Substring(openBracketLoc + 1, closeBracketLoc - 1);
-                if (!symbolTable.Contains(labelToAdd))
-                {
-                    symbolTable.Add(labelToAdd, instructionNum);
-                }
-                else symbolTable.Replace(labelToAdd, instructionNum);
-            }
-        }
-
-        private string CommentFilter(string currentLine)
-        {
-            var commentLocation = currentLine.IndexOf("//");
-            if (commentLocation > -1)
-            {
-                return currentLine.Substring(0, commentLocation);
-            }
-            return currentLine;
+            return commandsAndLabels;
         }
     }
 }
