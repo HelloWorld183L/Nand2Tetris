@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Leon\\source\\repos\\HackAssembler.ConsoleUI\\HackAssembler\\HackAssembler.ConsoleUI.csproj",
+      "projectUniqueName": "C:\\Users\\Leon\\Source\\Repos\\HelloWorld183L\\Nand2Tetris\\06\\HackAssembler\\HackAssembler.ConsoleUI\\HackAssembler.ConsoleUI.csproj",
       "projectName": "HackAssembler.ConsoleUI",
-      "projectPath": "C:\\Users\\Leon\\source\\repos\\HackAssembler.ConsoleUI\\HackAssembler\\HackAssembler.ConsoleUI.csproj",
+      "projectPath": "C:\\Users\\Leon\\Source\\Repos\\HelloWorld183L\\Nand2Tetris\\06\\HackAssembler\\HackAssembler.ConsoleUI\\HackAssembler.ConsoleUI.csproj",
       "packagesPath": "C:\\Users\\Leon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Leon\\source\\repos\\HackAssembler.ConsoleUI\\HackAssembler\\obj\\",
+      "outputPath": "C:\\Users\\Leon\\Source\\Repos\\HelloWorld183L\\Nand2Tetris\\06\\HackAssembler\\HackAssembler.ConsoleUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

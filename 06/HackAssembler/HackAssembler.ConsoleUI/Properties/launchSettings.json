@@ -2,7 +2,7 @@
   "profiles": {
     "HackAssembler": {
       "commandName": "Project",
-      "commandLineArgs": "Rect.asm Rect.hack"
+      "commandLineArgs": "MaxL.asm MaxL.hack"
     }
   }
 }

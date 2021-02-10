@@ -10,7 +10,6 @@ namespace HackAssembler
         private readonly Dictionary<string, string> _destTable;
         private readonly Dictionary<string, string> _compTable;
         private readonly Dictionary<string, string> _jumpTable;
-        private int _variableBaseAddress = 16;
 
         public CodeGenerator(SymbolTable table)
         {
@@ -98,9 +97,9 @@ namespace HackAssembler
         {
             var aInstruction = string.Empty;
             var content = command[1..];
-            var validAddress = int.TryParse(content, out int address);
+            var isNumber = int.TryParse(content, out int address);
 
-            if (_symbolTable.Contains(content) && !validAddress)
+            if (_symbolTable.Contains(content) && !isNumber)
             {
                 address = _symbolTable.GetValue(content);
             }
@@ -129,42 +128,12 @@ namespace HackAssembler
             if (equalIndex > -1) dest = currentLine.Substring(0, equalIndex);
             if (semicolonIndex > -1) jump = currentLine.Substring(semicolonIndex + 1);
 
+            if (comp.Contains('M')) aBit = '1';
             var destBits = _destTable[dest];
             var compBits = _compTable[comp];
             var jumpBits = _jumpTable[jump];
 
             return instruction + aBit + compBits + destBits + jumpBits;
-        }
-
-        private IEnumerable<string> AssignBits(string[] splitInstruction, string originalLine)
-        {
-            var jumpBits = "000";
-            var compBits = "000000";
-            var destBits = "000";
-            var a = '0';
-
-            if (splitInstruction[1].Contains('J'))
-            {
-                jumpBits = _jumpTable[splitInstruction[1]];
-            }
-            else if (splitInstruction.Length > 2)
-            {
-                jumpBits = _jumpTable[splitInstruction[2]];
-                if (splitInstruction[1].Contains('M')) a = '1';
-            }
-            else
-            {
-                compBits = _compTable[splitInstruction[1]];
-                if (splitInstruction[1].Contains('M')) a = '1';
-            }
-
-            if (originalLine.Contains('=')) destBits = _destTable[splitInstruction[0]];
-            else if (originalLine.Contains(';')) compBits = _compTable[splitInstruction[0]];
-
-            yield return a.ToString();
-            yield return destBits;
-            yield return compBits;
-            yield return jumpBits;
         }
 
         private string CreatePlaceHolderBits(string instruction)

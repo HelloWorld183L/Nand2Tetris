@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "si8ml8K+JoEqJ7jmceVCW6nxsnMVVp1qYYkRyC9fDl8e5jm3EWnhtcWR9ROPXTf2fIGillR+V35JCrKrpr57yg==",
+  "dgSpecHash": "exputlfeReGkXC+c0r19TjLvN1aBK/BjnEG1n5sSJC8meG6rYhf5r84hvkGk23+vbxmb38KgJEoTb/NLXf4DVQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Leon\\source\\repos\\HackAssembler.ConsoleUI\\HackAssembler\\HackAssembler.ConsoleUI.csproj",
+  "projectFilePath": "C:\\Users\\Leon\\Source\\Repos\\HelloWorld183L\\Nand2Tetris\\06\\HackAssembler\\HackAssembler.ConsoleUI\\HackAssembler.ConsoleUI.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

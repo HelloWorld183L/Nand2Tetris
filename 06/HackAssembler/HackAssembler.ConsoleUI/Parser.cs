@@ -12,21 +12,21 @@ namespace HackAssembler
             var filteredCommands = FilterCode(fileReader);
             AddLabels(filteredCommands, symbolTable);
 
-            var i = 0;
-            foreach (var command in filteredCommands)
+            for (int i = 0; i < filteredCommands.Count; i++)
             {
+                var command = filteredCommands[i];
+
                 if (command.StartsWith("@"))
                 {
                     var instructionA = command[1..];
-                    var validInstruction = int.TryParse(instructionA, out int _);
+                    var isNumber = int.TryParse(instructionA, out int _);
 
-                    if (!symbolTable.Contains(instructionA) && validInstruction)
+                    if (!symbolTable.Contains(instructionA) && !isNumber)
                     {
                         symbolTable.Add(instructionA, variableAddress);
                         variableAddress++;
                     }
                 }
-                i++;
             }
             filteredCommands.RemoveAll(command => command.StartsWith('('));
             return filteredCommands;
@@ -40,7 +40,12 @@ namespace HackAssembler
             {
                 if (command.StartsWith('(') && command.EndsWith(')'))
                 {
-                    var label = command.Substring(1, command.IndexOf(')'));
+                    var startIndex = 1;
+                    var closingBracketLoc = command.IndexOf(')');
+                    var length = closingBracketLoc - startIndex;
+                    if (length == 0) length = 1;
+                    var label = command.Substring(startIndex, length);
+
                     symbolTable.Add(label, i - removedLabels);
                     removedLabels++;
                 }
